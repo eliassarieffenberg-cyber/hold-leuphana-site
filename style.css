@@ -1,0 +1,649 @@
+/* ============================
+   RESET & BASE STYLES
+============================ */
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    background-color: #0d0d0d;
+    background-image: url('images/kuffiyeh-bg.jpg');
+    background-repeat: repeat;
+    background-size: 260px 260px;
+    color: #ffffff;
+    font-family: Georgia, 'Times New Roman', serif;
+}
+
+a {
+    color: inherit;
+}
+
+/* ============================
+   HEADER
+============================ */
+:root {
+    --leuphana-maroon: #7d222a;
+}
+
+/* ============================
+   PASSWORD PROTECTION MODAL
+============================ */
+.password-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.95);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 9999;
+}
+
+.password-modal.hidden {
+    display: none;
+}
+
+.password-modal-content {
+    background: var(--leuphana-maroon);
+    padding: 50px 40px;
+    border-radius: 8px;
+    max-width: 400px;
+    width: 90%;
+    text-align: center;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.7);
+}
+
+.password-modal-content h2 {
+    font-family: 'Arial Black', Arial, sans-serif;
+    font-size: 1.8rem;
+    margin: 0 0 15px 0;
+    color: #fff;
+}
+
+.password-modal-content p {
+    font-family: Arial, sans-serif;
+    font-size: 1rem;
+    margin: 0 0 25px 0;
+    color: #f0b8bd;
+}
+
+#passwordInput {
+    width: 100%;
+    padding: 12px 15px;
+    margin-bottom: 15px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 1rem;
+    font-family: Arial, sans-serif;
+    box-sizing: border-box;
+}
+
+#passwordInput:focus {
+    outline: none;
+    border-color: #fff;
+    background-color: #f9f9f9;
+}
+
+#passwordSubmitBtn {
+    width: 100%;
+    padding: 12px 20px;
+    background: #ff2d6b;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    font-family: Arial, sans-serif;
+    font-weight: 700;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background 0.2s ease;
+}
+
+#passwordSubmitBtn:hover {
+    background: #e6246b;
+}
+
+.password-error {
+    color: #ffccdd;
+    font-size: 0.9rem;
+    margin: 15px 0 0 0;
+    display: none;
+}
+
+.password-error.show {
+    display: block;
+}
+
+.hidden-until-auth {
+    display: block;
+}
+
+.hidden-until-auth.hidden {
+    display: none;
+}
+
+.site-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 25px 50px;
+    background-color: var(--leuphana-maroon);
+    border-bottom: 1px solid #5c1620;
+    position: relative;
+}
+
+.logo {
+    font-family: 'Arial Black', Arial, sans-serif;
+    font-weight: 900;
+    font-size: 1.4rem;
+    color: #fff;
+    text-decoration: none;
+}
+
+/* Horizontal nav — shown alongside the dropdown menu */
+.main-nav {
+    display: block;
+}
+
+.main-nav ul {
+    list-style: none;
+    display: flex;
+    gap: 28px;
+    margin: 0;
+    padding: 0;
+}
+
+.main-nav a {
+    font-family: Arial, sans-serif;
+    font-weight: 700;
+    font-size: 1rem;
+    color: #f0b8bd;
+    text-decoration: none;
+    transition: color 0.2s ease;
+}
+
+.main-nav a:hover {
+    color: #fff;
+}
+
+.main-nav a.active {
+    color: #fff;
+    text-decoration: underline;
+}
+
+/* ============================
+   MENU BUTTON + DROPDOWN
+============================ */
+.menu-wrapper {
+    position: relative;
+}
+
+.menu-icon {
+    background: none;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    color: #fff;
+    font-family: Arial, sans-serif;
+    font-size: 0.8rem;
+    padding: 0;
+}
+
+.menu-icon .dots {
+    width: 34px;
+    height: 34px;
+    border-radius: 50%;
+    background: #1a1a1a;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 4px;
+    font-size: 1.4rem;
+    letter-spacing: 2px;
+    transition: background 0.2s ease;
+}
+
+.menu-icon:hover .dots {
+    background: #ff2d6b;
+}
+
+.dropdown-menu {
+    position: absolute;
+    top: 60px;
+    right: 0;
+    background: #0d0d0d;
+    border: 1px solid #333;
+    min-width: 200px;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-10px);
+    transition: opacity 0.2s ease, transform 0.2s ease;
+    z-index: 100;
+}
+
+.dropdown-menu.open {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
+.dropdown-menu ul {
+    list-style: none;
+    margin: 0;
+    padding: 10px 0;
+}
+
+.dropdown-menu li {
+    border-bottom: 1px solid #222;
+}
+
+.dropdown-menu li:last-child {
+    border-bottom: none;
+}
+
+.dropdown-menu a {
+    display: block;
+    padding: 15px 25px;
+    font-family: Arial, sans-serif;
+    font-weight: 700;
+    font-size: 1.1rem;
+    color: #ff2d6b;
+    text-decoration: none;
+    transition: background 0.2s ease;
+}
+
+.dropdown-menu a:hover {
+    background: #1a1a1a;
+    color: #fff;
+}
+
+.dropdown-menu a.active {
+    color: #fff;
+    text-decoration: underline;
+}
+
+/* ============================
+   HERO SECTION
+============================ */
+.hero {
+    padding: 90px 50px 60px;
+    text-align: center;
+}
+
+.hero h1 {
+    font-family: 'Arial Black', Arial, sans-serif;
+    font-weight: 900;
+    font-size: clamp(2.5rem, 7vw, 5.5rem);
+    margin: 0 auto;
+    line-height: 1.05;
+    background: rgba(125, 34, 42, 0.6);
+    padding: 30px 50px;
+    max-width: 900px;
+    display: inline-block;
+}
+
+/* ============================
+   IMAGE BAND WITH OVERLAY TEXT
+============================ */
+.image-band {
+    position: relative;
+    min-height: 320px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 40px 50px;
+}
+
+.overlay-box {
+    background: #0d0d0d;
+    padding: 35px 50px;
+    max-width: 900px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.overlay-box p {
+    font-family: 'Arial Black', Arial, sans-serif;
+    font-weight: 700;
+    font-size: clamp(1.1rem, 2.2vw, 1.6rem);
+    text-align: center;
+    margin: 0;
+    line-height: 1.4;
+}
+
+/* ============================
+   REPORT EMBED (smaller, centered, with overlaid download link)
+============================ */
+.report-embed-wrapper {
+    display: flex;
+    justify-content: center;
+    padding: 60px 25px;
+}
+
+.pdf-viewer-container {
+    width: 100%;
+    max-width: 900px;
+    background: #1a1a1a;
+    border: 1px solid #333;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+}
+
+.pdf-controls {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 15px;
+    padding: 15px 20px;
+    background: #0d0d0d;
+    border-bottom: 1px solid #333;
+    flex-wrap: wrap;
+}
+
+.control-btn {
+    background: var(--leuphana-maroon);
+    color: #fff;
+    border: none;
+    padding: 8px 16px;
+    font-family: Arial, sans-serif;
+    font-weight: 700;
+    font-size: 0.9rem;
+    cursor: pointer;
+    border-radius: 4px;
+    transition: background 0.2s ease;
+}
+
+.control-btn:hover {
+    background: #9d3a42;
+}
+
+.control-btn:disabled {
+    background: #555;
+    cursor: not-allowed;
+    opacity: 0.6;
+}
+
+.page-info {
+    font-family: Arial, sans-serif;
+    font-size: 0.95rem;
+    color: #fff;
+    min-width: 180px;
+    text-align: center;
+}
+
+.download-btn {
+    background: #ff2d6b;
+    color: #fff;
+    border: none;
+    padding: 8px 16px;
+    font-family: Arial, sans-serif;
+    font-weight: 700;
+    font-size: 0.9rem;
+    text-decoration: none;
+    border-radius: 4px;
+    transition: background 0.2s ease;
+    display: inline-block;
+}
+
+.download-btn:hover {
+    background: #e6246b;
+}
+
+.pdf-canvas-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    padding: 20px;
+    max-height: 800px;
+    overflow-y: auto;
+    width: 100%;
+}
+
+#pdfCanvas {
+    max-width: 100%;
+    height: auto;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+    display: block;
+}
+
+/* ============================
+   GENERIC PAGE CONTENT
+   (About / Contact / Demands intro)
+============================ */
+.page-content {
+    padding: 80px 50px;
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+.page-content h1 {
+    font-family: 'Arial Black', Arial, sans-serif;
+    font-size: 3rem;
+    margin-bottom: 30px;
+}
+
+.page-content p {
+    font-size: 1.15rem;
+    line-height: 1.7;
+    margin-bottom: 20px;
+}
+
+.intro-text,
+.outro-text {
+    font-size: 1.1rem;
+    line-height: 1.7;
+    max-width: 900px;
+    margin: 30px 0;
+}
+
+/* ============================
+   DEMAND BOXES (Demands page)
+============================ */
+.demand-box-wrapper {
+    background-image: url('images/kuffiyeh-bg.jpg');
+    background-size: 140px 140px;
+    background-position: center;
+    padding: 15px;
+    margin: 50px auto;
+    max-width: 950px;
+}
+
+.demand-box {
+    background-color: #0d0d0d;
+    padding: 45px 55px;
+}
+
+.demand-box h2 {
+    font-family: Georgia, 'Times New Roman', serif;
+    font-weight: 700;
+    font-size: 1.8rem;
+    margin: 0 0 35px;
+    color: #fff;
+}
+
+.box-subtext {
+    font-size: 1.1rem;
+    margin-bottom: 25px;
+    color: #ccc;
+}
+
+.demands-list {
+    margin: 0;
+    padding-left: 35px;
+    list-style-position: outside;
+}
+
+.demands-list li {
+    font-family: Georgia, 'Times New Roman', serif;
+    font-size: 1.25rem;
+    line-height: 1.6;
+    margin-bottom: 30px;
+}
+
+.demands-list li a,
+.demands-list li strong {
+    font-weight: 700;
+    text-decoration: underline;
+}
+
+/* ============================
+   FOOTER
+============================ */
+.site-footer {
+    padding: 50px;
+    background-color: var(--leuphana-maroon);
+    border-top: 1px solid #5c1620;
+}
+
+.footer-nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.footer-nav ul {
+    list-style: none;
+    display: flex;
+    gap: 40px;
+    margin: 0;
+    padding: 0;
+}
+
+.footer-nav a {
+    font-family: Arial, sans-serif;
+    font-weight: 700;
+    font-size: 1.3rem;
+    color: #f0b8bd;
+    text-decoration: none;
+}
+
+.footer-nav a:hover {
+    color: #fff;
+}
+
+.instagram-btn {
+    width: 55px;
+    height: 55px;
+    border-radius: 50%;
+    background: #ff2d6b;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #000;
+    text-decoration: none;
+    font-size: 1.5rem;
+}
+
+.footer-columns {
+    display: flex;
+    gap: 100px;
+    margin-top: 80px;
+    flex-wrap: wrap;
+}
+
+.footer-columns>div {
+    flex: 1;
+    min-width: 280px;
+}
+
+.footer-columns h2 {
+    font-family: 'Arial Black', Arial, sans-serif;
+    font-size: 2.6rem;
+    margin: 0 0 25px;
+}
+
+.footer-columns p {
+    font-size: 1.1rem;
+    line-height: 1.6;
+    margin-bottom: 20px;
+}
+
+.footer-columns a {
+    color: #fff;
+}
+
+.footer-bottom-line {
+    border: none;
+    border-top: 1px solid #333;
+    margin-top: 60px;
+}
+
+/* ============================
+   RESPONSIVE / MOBILE
+============================ */
+@media (max-width: 768px) {
+    .site-header {
+        padding: 20px 25px;
+    }
+
+    .main-nav {
+        display: none;
+    }
+
+    .hero {
+        padding: 60px 25px 40px;
+    }
+
+    .image-band {
+        padding: 30px 25px;
+    }
+
+    .overlay-box {
+        padding: 25px 20px;
+    }
+
+    .report-embed-wrapper {
+        padding: 40px 20px;
+    }
+
+    .report-cover {
+        padding: 30px 20px;
+        min-height: 320px;
+    }
+
+    .page-content {
+        padding: 50px 25px;
+    }
+
+    .page-content h1 {
+        font-size: 2.2rem;
+    }
+
+    .demand-box {
+        padding: 30px 25px;
+    }
+
+    .demand-box h2 {
+        font-size: 1.4rem;
+    }
+
+    .demands-list li {
+        font-size: 1.1rem;
+    }
+
+    .footer-nav {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 20px;
+    }
+
+    .footer-nav ul {
+        flex-direction: column;
+        gap: 15px;
+    }
+
+    .footer-columns {
+        flex-direction: column;
+        gap: 40px;
+        margin-top: 50px;
+    }
+
+    .footer-columns h2 {
+        font-size: 2rem;
+    }
+}

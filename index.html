@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Hold Leuphana Accountable</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- Password Protection Modal -->
+  <div id="passwordModal" class="password-modal">
+    <div class="password-modal-content">
+      <h2>Access Protected Content</h2>
+      <p>Please enter the password to access this site</p>
+      <input type="password" id="passwordInput" placeholder="Enter password" autocomplete="off">
+      <button id="passwordSubmitBtn">Unlock</button>
+      <p id="passwordError" class="password-error"></p>
+    </div>
+  </div>
+
+  <!-- Main Content (hidden until password is correct) -->
+  <div id="mainContent" class="hidden-until-auth">
+
+  <header class="site-header">
+    <a href="index.html" class="logo">Hold Leuphana Accountable</a>
+
+    <nav class="main-nav">
+      <ul>
+        <li><a href="index.html" class="active">Home</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="contact.html">Contact</a></li>
+        <li><a href="demands.html">Demands</a></li>
+      </ul>
+    </nav>
+
+    <div class="menu-wrapper">
+      <button class="menu-icon" id="menuButton" aria-expanded="false" aria-controls="dropdownMenu">
+        <div class="dots">•••</div>
+        Menu
+      </button>
+
+      <nav class="dropdown-menu" id="dropdownMenu">
+        <ul>
+          <li><a href="index.html" class="active">Home</a></li>
+          <li><a href="about.html">About</a></li>
+          <li><a href="contact.html">Contact</a></li>
+          <li><a href="demands.html">Demands</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <section class="hero">
+    <h1>Hold Leuphana Accountable</h1>
+  </section>
+
+  <section class="image-band">
+    <div class="overlay-box">
+      <p>An investigative report on the support of Israel's occupation and genocide in Palestine by Leuphana University</p>
+    </div>
+  </section>
+
+  <section class="report-embed-wrapper">
+    <div class="pdf-viewer-container">
+      <div class="pdf-controls">
+        <button id="prevPageBtn" class="control-btn" aria-label="Previous page">← Previous</button>
+        <span id="pageInfo" class="page-info">Page <span id="currentPage">1</span> of <span id="totalPages">0</span></span>
+        <button id="nextPageBtn" class="control-btn" aria-label="Next page">Next →</button>
+        <a href="V3-Complicity-Report-harmonized 1 conv.pdf" class="download-btn" target="_blank">📥 Download</a>
+      </div>
+      <div class="pdf-canvas-wrapper">
+        <canvas id="pdfCanvas"></canvas>
+      </div>
+    </div>
+  </section>
+
+<footer class="site-footer">
+    <div class="footer-nav">
+        <ul>
+            <li><a href="demands.html">Demands</a></li>
+            <li><a href="contact.html">Contact</a></li>
+            <li><a href="about.html">About</a></li>
+        </ul>
+        <a href="https://www.instagram.com/studentsforpalestine.lg?igsh=NnN2ajZ0azlpNnh5" class="instagram-btn"
+            target="_blank" aria-label="Instagram">📷</a>
+    </div>
+
+    <hr class="footer-bottom-line">
+    <h2>Imprint</h2>
+    <p>Students for Palestine</p>
+    <p>Instagram: <a href="https://www.instagram.com/studentsforpalestine.lg?igsh=NnN2ajZ0azlpNnh5"
+            target="_blank">studentsforpalestine.lg</a></p>
+    <p>Email: <a
+            href="studentsforpalestine.lg">https://www.instagram.com/studentsforpalestine.lg?igsh=NnN2ajZ0azlpNnh5</a>
+    </p>
+    </div>
+    </div>
+</footer>
+
+  </div><!-- End mainContent -->
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>
